@@ -1,12 +1,10 @@
 import { useState, useEffect, KeyboardEvent } from "react"
 
-export default function () {
-  const [list, setList] = useState(() => {
-    const dadosLocais = localStorage.getItem("localData")
-    if (dadosLocais)
-      return JSON.parse(dadosLocais) as string[]
-    return ["Dunha", "Dirce"]
-  })
+export default function (props: { 
+  title: string, 
+  stateList: [string[], React.Dispatch<React.SetStateAction<string[]>>] 
+}) {
+  const [list, setList] = props.stateList
 
   const store = () => {
     localStorage.setItem("localData", JSON.stringify(list))
@@ -54,7 +52,7 @@ export default function () {
   }
 
   return <>
-    <input type="text" onKeyUp={adicionar} />
+    <input type="text" onKeyUp={adicionar} placeholder={props.title} />
     {list.map((el, idx) =>
       <div key={idx} onClick={() => remover(idx)}>{el}</div>
     )}
