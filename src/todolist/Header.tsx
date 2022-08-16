@@ -1,9 +1,10 @@
-export default function (props: {
-  stateList: [string[], React.Dispatch<React.SetStateAction<string[]>>]
-}) {
-  const [list] = props.stateList
+import { useContext } from "react"
+import { TodoListContext } from "./TodoListContext"
+
+export default function () {
+  const context = useContext(TodoListContext)
 
   return <>
-    <h1>ToDoList: {list.length}</h1>
+    <h1>ToDoList: {context.list.length}</h1>
   </>
 }

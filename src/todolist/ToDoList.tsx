@@ -1,10 +1,10 @@
-import { useState, useEffect, KeyboardEvent } from "react"
+import { useState, useEffect, KeyboardEvent, useContext } from "react"
+import { TodoListContext } from "./TodoListContext"
 
 export default function (props: { 
   title: string, 
-  stateList: [string[], React.Dispatch<React.SetStateAction<string[]>>] 
 }) {
-  const [list, setList] = props.stateList
+  const {list, setList} = useContext(TodoListContext)
 
   const store = () => {
     localStorage.setItem("localData", JSON.stringify(list))
